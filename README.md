@@ -6,7 +6,7 @@ Inventory management REST API with CRUD operations for categories and products
 - ASP.Net Core
 - Entity Framework Core
 - Sql Server
-- Swagger
+- Swagger/OpenApi
 
 ## Features
 - Products CRUD
@@ -18,9 +18,9 @@ Inventory management REST API with CRUD operations for categories and products
 - Data annotation validations
 - Fluent API
 - SQL Server migration
+- JWT Authentication
 
   ## Next Features
-- JWT Authentication
 - Role Based Authorization
 - Inventory Movements
 - Frontend Integration
