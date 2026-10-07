@@ -2,6 +2,7 @@
 using InventoryApi.DTOs;
 using InventoryApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryApi.Controllers
 {
@@ -16,6 +17,7 @@ namespace InventoryApi.Controllers
             _productService = productService;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAll()
         {
