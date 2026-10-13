@@ -17,7 +17,6 @@ namespace InventoryApi.Controllers
             _productService = productService;
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAll()
         {
@@ -57,6 +56,7 @@ namespace InventoryApi.Controllers
             return Ok(productDto);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<ProductDto>> CreateProduct(CreateProductDto productDto)
         {
@@ -86,6 +86,7 @@ namespace InventoryApi.Controllers
             return CreatedAtAction(nameof(GetProduct), new { id = responseDto.Id }, responseDto);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, CreateProductDto productDto)
         {
@@ -108,6 +109,7 @@ namespace InventoryApi.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {

@@ -1,13 +1,14 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi;
-using System.Text;
-using System.Text.Json.Serialization;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using InventoryApi.Data;
+using InventoryApi.Seed;
 using InventoryApi.Services;
 using InventoryApi.Settings;
-using InventoryApi.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -75,6 +76,12 @@ builder.Services.AddSwaggerGen(options =>
 
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+
+var context = scope.ServiceProvider.GetRequiredService<InventoryDbContext>();
+
+await DbSeeder.SeedAdminAsync(context);
 
 if (builder.Environment.IsDevelopment())
 {

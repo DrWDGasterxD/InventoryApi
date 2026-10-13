@@ -2,6 +2,7 @@
 using InventoryApi.DTOs;
 using InventoryApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryApi.Controllers
 {
@@ -49,6 +50,7 @@ namespace InventoryApi.Controllers
             return Ok(categoryDto);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<CategoryDto>> CreateCategory(CreateCategoryDto categoryDto)
         {
@@ -67,7 +69,7 @@ namespace InventoryApi.Controllers
 
             return CreatedAtAction(nameof(GetCategory), new { id = responseDto.Id}, responseDto);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCategory(int id, CreateCategoryDto categoryDto)
         {
@@ -86,7 +88,7 @@ namespace InventoryApi.Controllers
 
             return NoContent();
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
